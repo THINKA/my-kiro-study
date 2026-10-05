@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "id": "power-amazon-adapter",
+  "name": "Amazon Adapter Power Plugin",
+  "version": "1.0.0",
+  "description": "提供亚马逊 API 接口适配与 Spec 验证的专属能力插件",
+  "main": "../src/index.ts",
+  "skills": [
+    "./SKILLS.md"
+  ],
+  "permissions": [
+    "network:http",
+    "file:read",
+    "file:write"
+  ],
+  "environment": {
+    "NODE_ENV": "development"
+  },
+  "author": "Dev Team",
+  "license": "MIT"
+}

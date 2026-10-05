@@ -1,0 +1,27 @@
+{
+  "$schema": "https://kiro.dev/schemas/hook-v1.json",
+  "id": "post-edit-build-check",
+  "name": "Post-Edit Build & Spec Validation Check",
+  "version": "1.0.0",
+  "description": "编辑 Markdown 或配置文件后自动触发构建校验与多语言结构同步",
+  "enabled": true,
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.md",
+      "specs/**/*.spec.md",
+      ".vitepress/config/**/*.ts",
+      ".vitepress/theme/**/*.{vue,ts}"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "agent": "doc-architect",
+    "prompt": "检测到文档或配置文件变更。请按以下顺序执行质量校验：\n1. 运行 `pnpm run typecheck` 确保 TypeScript 类型与 Frontmatter 格式正确。\n2. 若修改了 `src/` 下的中文 `.md` 文档，检查并同步更新 `en/` 和 `vi/` 目录下的对应语言版本。\n3. 若修改了 `specs/` 目录，验证修改内容是否符合 SDD 格式要求。\n4. 确保修改未引入未引用的断链或死链。"
+  },
+  "settings": {
+    "timeout": 300,
+    "runInBackground": true,
+    "notifyOnFailure": true
+  }
+}
